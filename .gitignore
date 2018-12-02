@@ -1,2 +1,8 @@
+# Compilaciones
 src/Pregunta_1/*.class
 src/Pregunta_2/*.class
+*.class
+# Carpetas
+*.jar
+/.vscode
+/build
