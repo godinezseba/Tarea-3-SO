@@ -6,3 +6,8 @@ src/Pregunta_2/*.class
 *.jar
 /.vscode
 /build
+# Archivos de salida
+log_cliente.txt
+log_promotor.txt
+log_cajero.txt
+log_empaquetador.txt
