@@ -23,32 +23,29 @@ public class Tienda extends Archivos{
             notifyAll();
         }
     }
-
+    
     public void cliente() throws InterruptedException{
-        
         synchronized(this){
+            log_cliente(cliente);
             this.estado = 1;
             notifyAll();
             while (!(this.estado == 0))
-                log_cliente(file, this.cliente); 
                 wait();
+            log_cliente(cliente);
         }
     }
 
     public void promotor() throws InterruptedException{
         int opcion;
-        FileWriter file = new FileWriter("log_promotor");
         while (true) {
             synchronized (this){
+                log_promotor(compras);
                 while(!(estado == 1)){
-                    log_promotor(this.compras);
-                    wait(5);
+                    wait();
                     if(termino){
-                        file.close();
                         System.exit(0);
                     }
                 }
-                
                 System.out.println("Promotor: Hola! " +this.cliente+", tengo los siguiente productos para ofrecerte:"+
                 "\n-Zapatos $20000 (1)"+ 
                 "\n-Jeans   $10000 (2)"+
@@ -82,10 +79,10 @@ public class Tienda extends Archivos{
                     notifyAll();
                 }
                 while (!(estado == 0)) {
-                    log_promotor(this.compras);
-                    wait(5);
+                    wait();
                 }
                 System.out.println("Promotor: Gracias! Vuelva pronto!");
+                log_promotor(compras);
             }
         }
     }
@@ -94,11 +91,13 @@ public class Tienda extends Archivos{
         int opcion;
         while (true) {
             synchronized(this){
+                log_cajero(compras);
                 while(!(estado == 2)){
-                    wait(5);
+                    wait();
                     if(termino)
                         System.exit(0);
                 }
+                
                 System.out.println("Cajero: Como pagara?:"+
                 "\n-Efectivo (1)"+
                 "\n-Tarjeta  (2)");
@@ -120,13 +119,14 @@ public class Tienda extends Archivos{
                 this.estado = 3;
                 notifyAll();
                 while (!(estado == 2)) {
-                    wait(5);
+                    wait();
                 }
                 System.out.println("Cajero: Serian: " + producto.total);
                 compras.addLast(producto);
                 System.out.println("Cajero: Gracias!");
                 this.estado = 0;
                 notifyAll();
+                log_cajero(compras);
             }
         }
     }
@@ -135,11 +135,13 @@ public class Tienda extends Archivos{
         int opcion;
         while (true) {
             synchronized(this){
+                log_empaquetador(compras);
                 while(!(estado == 3)){
-                    wait(5);
+                    wait();
                     if(termino)
                         System.exit(0);
                 }
+               
                 System.out.println("Empaquetador: Que tipo de bolsa desea?:"+
                 "\n-Plastico $500 (1)"+
                 "\n-Tela     $200 (2)"+
@@ -170,6 +172,7 @@ public class Tienda extends Archivos{
                     wait(5);
                 }
                 System.out.println("Empaquetador: Gracias por venir!");
+                log_empaquetador(compras);
             }
         }
     }

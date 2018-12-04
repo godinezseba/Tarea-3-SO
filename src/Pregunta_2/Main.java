@@ -51,6 +51,7 @@ public class Main {
         });
         empaquetador.setName("Empaquetador");
         empaquetador.start();
+
         // Parte el Menu
         System.out.println("Ingrese Nombre de Cliente:"
             + "\n(para salir ingrese \"Salir\")");
@@ -76,9 +77,6 @@ public class Main {
             cliente.start();
             cliente.join();
             
-            for (Producto var : tienda.compras) {
-                System.out.println(var);
-            }
 
             System.out.println("Ingrese Nombre de Cliente:"
             + "\n(para salir ingrese \"Salir\")");

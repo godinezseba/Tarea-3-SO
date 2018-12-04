@@ -1,9 +1,9 @@
 package Pregunta_2;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.LinkedList;
+import java.io.PrintStream;
+import java.io.FileOutputStream;
 
 /**
  * Archivos
@@ -29,7 +29,7 @@ public class Archivos {
             }
             file.close();
         } catch (IOException e) {
-            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+            System.err.println("Error al escribir sobre el archivo log_promotor.txt");
         }
     }
 
@@ -42,7 +42,7 @@ public class Archivos {
             }
             file.close();
         } catch (IOException e) {
-            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+            System.err.println("Error al escribir sobre el archivo log_promotor.txt");
         }
     }
 
@@ -55,7 +55,7 @@ public class Archivos {
             }
             file.close();
         } catch (IOException e) {
-            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+            System.err.println("Error al escribir sobre el archivo log_promotor.txt");
         }
     }
 
