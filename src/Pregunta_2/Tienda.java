@@ -24,14 +24,14 @@ public class Tienda extends Archivos{
         }
     }
 
-    public void cliente(FileWriter file) throws InterruptedException{
+    public void cliente() throws InterruptedException{
         
         synchronized(this){
             this.estado = 1;
             notifyAll();
             while (!(this.estado == 0))
                 log_cliente(file, this.cliente); 
-                wait(5);
+                wait();
         }
     }
 
@@ -41,7 +41,7 @@ public class Tienda extends Archivos{
         while (true) {
             synchronized (this){
                 while(!(estado == 1)){
-                    log_promotor(file, this.compras);
+                    log_promotor(this.compras);
                     wait(5);
                     if(termino){
                         file.close();
@@ -82,7 +82,7 @@ public class Tienda extends Archivos{
                     notifyAll();
                 }
                 while (!(estado == 0)) {
-                    log_promotor(file, this.compras);
+                    log_promotor(this.compras);
                     wait(5);
                 }
                 System.out.println("Promotor: Gracias! Vuelva pronto!");

@@ -2,6 +2,7 @@ package Pregunta_2;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.LinkedList;
 
 /**
@@ -9,35 +10,53 @@ import java.util.LinkedList;
  */
 public class Archivos {
 
-    public void log_cliente(FileWriter file, String cliente) {
+    public void log_cliente(String cliente) {
         try {
-            file.write("["+java.time.LocalDateTime.now()+"] Esta siendo atendido: " + cliente);
+            PrintStream file = new PrintStream(new FileOutputStream("log_cliente.txt", true));
+            file.println("["+java.time.LocalDateTime.now()+"] Esta siendo atendido: " + cliente);
+            file.close();
         } catch (IOException e) {
             System.err.println("Error al escribir sobre el archivo log_cliente.txt");
         }
     }
 
-    public void log_promotor(FileWriter file, LinkedList<Producto> productos) {
+    public void log_promotor(LinkedList<Producto> productos) {
         try {
-            file.write("["+java.time.LocalDateTime.now()+"] Clientes atendidos:");
-        } catch (IOException e) {
-            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
-        }
-        for (Producto var : productos) {
-            try {
-                file.write("Cliente: " + var.cliente + ", compro: " + var.producto );
-            } catch (IOException e) {
-                System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+            PrintStream file = new PrintStream(new FileOutputStream("log_promotor.txt", true));
+            file.println("["+java.time.LocalDateTime.now()+"] Clientes atendidos:");
+            for (Producto var : productos) {
+                file.println("Cliente: " + var.cliente + ", compro: " + var.producto );
             }
+            file.close();
+        } catch (IOException e) {
+            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
         }
     }
 
-    public void log_cajero(FileWriter file, LinkedList<Producto> productos) {
-        System.out.println("hola");
+    public void log_cajero(LinkedList<Producto> productos) {
+        try {
+            PrintStream file = new PrintStream(new FileOutputStream("log_cajero.txt", true));
+            file.println("["+java.time.LocalDateTime.now()+"] Clientes atendidos:");
+            for (Producto var : productos) {
+                file.println("Cliente: " + var.cliente + ", compro: " + var.producto +" pago con: "+ var.pago);
+            }
+            file.close();
+        } catch (IOException e) {
+            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+        }
     }
 
-    public void log_empaquetador(FileWriter file, LinkedList<Producto> productos) {
-        System.out.println("hola");
+    public void log_empaquetador(LinkedList<Producto> productos) {
+        try {
+            PrintStream file = new PrintStream(new FileOutputStream("log_empaquetador.txt", true));
+            file.println("["+java.time.LocalDateTime.now()+"] Clientes atendidos:");
+            for (Producto var : productos) {
+                file.println("Cliente: " + var.cliente + ", llevo bolsa: " + var.bolsa);
+            }
+            file.close();
+        } catch (IOException e) {
+            System.err.println("Error al escribir sobre el archivo log_cliente.txt");
+        }
     }
 
 }

@@ -1,14 +1,16 @@
 package Pregunta_2;
 
-import java.io.FileWriter;
+import java.io.PrintStream;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 
 public class Main {
     
     public static void main(String[] args) throws InterruptedException{
         final Tienda tienda = new Tienda();
+        
         Thread cliente;
-        FileWriter file = new FileWriter("log_cliente.txt");
+        // Thread Promotor
         Thread promotor = new Thread(new Runnable(){
             @Override
             public void run() {
@@ -21,6 +23,7 @@ public class Main {
         });
         promotor.setName("Promotor");
         promotor.start();
+        // Thread Cajero
         Thread cajero = new Thread(new Runnable(){
         
             @Override
@@ -34,6 +37,7 @@ public class Main {
         });
         cajero.setName("Cajero");
         cajero.start();
+        // Thread Empaquetador
         Thread empaquetador = new Thread(new Runnable(){
         
             @Override
@@ -47,6 +51,7 @@ public class Main {
         });
         empaquetador.setName("Empaquetador");
         empaquetador.start();
+        // Parte el Menu
         System.out.println("Ingrese Nombre de Cliente:"
             + "\n(para salir ingrese \"Salir\")");
             try {
@@ -61,7 +66,7 @@ public class Main {
                 @Override
                 public void run() {
                     try {
-                        tienda.cliente(file);
+                        tienda.cliente();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -88,6 +93,5 @@ public class Main {
         promotor.join();
         cajero.join();
         empaquetador.join();
-        file.close();
     }
 }
